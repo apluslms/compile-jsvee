@@ -1,0 +1,13 @@
+destination: animations.js
+template: template.js
+placeholder: "@@ANIMATIONS@@"
+line_template: "{prefix}JSVEE.animations['{name}'] = {data};\n"
+
+default_test: "*.animation.json"
+
+copy:
+  - source: /opt/jsvee/
+    files:
+      - engine.js
+      - pics/
+      - jsvee.css
