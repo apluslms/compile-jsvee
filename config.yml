@@ -5,6 +5,8 @@ line_template: "{prefix}JSVEE.animations['{name}'] = {data};\n"
 
 default_test: "*.animation.json"
 
+packages_dir: /opt/jsvee/
+
 copy:
   - source: /opt/jsvee/
     files:

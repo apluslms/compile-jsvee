@@ -57,6 +57,7 @@ def load_config():
         placeholder = conf['placeholder'],
         line_template = conf['line_template'],
         default_test = conf['default_test'],
+        packages_dir = Path(conf['packages_dir']),
         copy_files = [],
     )
 
@@ -101,6 +102,14 @@ def traverse(path, max_depth=0):
                 yield child
 
 
+def load_packages(config):
+    if config.package:
+        for package in config.package:
+            base = config.packages_dir
+            files = [f.relative_to(base) for f in traverse(base / package)]
+            config.copy_files.append((base, files))
+
+
 def collect(config):
     src = config.source
     dst = config.destination_file
@@ -115,7 +124,7 @@ def collect(config):
     # clean invalid names
     map_from = " "
     map_to = "_"
-    valid = set(ord(x) for x in string.ascii_letters+map_from+map_to)
+    valid = set(ord(x) for x in string.ascii_letters+string.digits+map_from+map_to+"-")
     nonvalid = "".join(chr(x) for x in range(255) if x not in valid)
     replace_table = str.maketrans(map_from, map_to, nonvalid)
     clean_name = lambda fn: fn.translate(replace_table)
@@ -186,6 +195,8 @@ def main():
         help="Source path to be searched")
     parser.add_argument('--test', '-t',
         help="Test path against pattern (e.g. *.custom.json)")
+    parser.add_argument('--package', '-p', action='append',
+        help="Include named packages to destination (can be passed multiple times)")
     parser.add_argument('--name-from-dir', dest='usedir', action='store_true',
         help="By default, we take the name from the filename, but it this flag is true, then we use the name of the directory.")
     parser.add_argument("--search-depth", dest='depth', type=int, default=3,
@@ -215,6 +226,8 @@ def main():
 
     if config.destination_file.exists() and not config.force:
         exit("Destination {} exists.".format(config.destination_file))
+
+    load_packages(config)
 
     if not config.destination.exists():
         os.makedirs(str(config.destination))
