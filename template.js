@@ -1,5 +1,5 @@
 /* JSVEE animations */
-(function ($) {
+(function($) {
   'use strict';
 
   if (window.JSVEE === undefined) {
