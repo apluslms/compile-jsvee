@@ -1,6 +1,6 @@
 FROM apluslms/compile:python3-0.1
 
-ARG VERSION=6a3f8714aec58a099b15cf7e45c33715925c4271
+ARG VERSION=86b6c14b61e1a553adad93ed7a0b27f466705dd4
 ARG DIR=jsvee-$VERSION
 
 RUN mkdir -p /work/ /opt/jsvee/ && cd /opt/jsvee/ \
