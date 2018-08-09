@@ -1,6 +1,6 @@
 FROM apluslms/compile:python3-0.1
 
-ARG VERSION=86b6c14b61e1a553adad93ed7a0b27f466705dd4
+ARG VERSION=8c3f1fccc398d46862bef86d6ec07470c46c04a2
 ARG DIR=jsvee-$VERSION
 
 RUN mkdir -p /work/ /opt/jsvee/ && cd /opt/jsvee/ \
@@ -14,7 +14,9 @@ RUN mkdir -p /work/ /opt/jsvee/ && cd /opt/jsvee/ \
  && mkdir kelmu && cp $DIR/kelmu.js kelmu \
  && mkdir scala && cp $DIR/scala/*.png $DIR/scala/*.json $DIR/scala/*.css $DIR/scala/*.js scala \
  && mkdir python && cp $DIR/python/*.css $DIR/python/*.js python \
- && cp -r $DIR/pics $DIR/jsvee.css . \
+ && cp -r $DIR/pics \
+          $DIR/messages_fi.json \
+          $DIR/jsvee.css . \
  && rm -r $DIR
 
 COPY collect.py config.yml template.js /opt/

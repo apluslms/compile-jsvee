@@ -11,5 +11,6 @@ copy:
   - source: /opt/jsvee/
     files:
       - engine.js
+      - messages_fi.json
       - pics/
       - jsvee.css

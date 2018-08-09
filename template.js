@@ -27,7 +27,7 @@
   @@ANIMATIONS@@
 
   /* Load all animations */
-  $(function () {
+  $(document).on('aplus:translation-ready', function () {
     $('.jsvee-animation, .animation').each(function () {
       $(this).addClass('jsvee-animation');
       var id = $(this).data('id');
