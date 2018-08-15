@@ -1,6 +1,6 @@
 FROM apluslms/compile:python3-0.1
 
-ARG VERSION=8c3f1fccc398d46862bef86d6ec07470c46c04a2
+ARG VERSION=eb3ce707b88bfe4f524292f24bef7e674559987a
 ARG DIR=jsvee-$VERSION
 
 RUN mkdir -p /work/ /opt/jsvee/ && cd /opt/jsvee/ \
@@ -20,6 +20,7 @@ RUN mkdir -p /work/ /opt/jsvee/ && cd /opt/jsvee/ \
  && rm -r $DIR
 
 COPY collect.py config.yml template.js /opt/
+COPY offline.js /opt/jsvee/
 
 ENTRYPOINT ["python3", "/opt/collect.py"]
 CMD ["-f", "html/_static/jsvee/"]
